@@ -17,31 +17,36 @@ public class Producto implements Serializable {
     }
 
     public String getDescripcion() {
-        return descripcion;
+        return descripcion; // Retorna la descripción del producto
     }
 
     public String getCodigo() {
-        return codigo;
+        return codigo; // Retorna el código del producto
     }
 
     public String getTipo() {
-        return tipo;
+        return tipo; // Retorna el tipo del producto
     }
 
     public double getCosto() {
-        return costo;
+        return costo; // Retorna el costo base del producto
     }
 
     public double getImpuesto() {
-        return impuesto;
+        return impuesto; // Retorna el porcentaje de impuesto sobre el producto
     }
 
-    // Método para calcular el precio total del producto, incluyendo el impuesto
+    /**
+     * Método para calcular el precio total del producto, incluyendo el impuesto.
+     * @return El precio total del producto con el impuesto.
+     */
     public double calcularPrecio() {
         return costo + (costo * (impuesto / 100)); // Cálculo: costo + impuesto sobre el costo
     }
 
-    // Método para mostrar los detalles del producto
+    /**
+     * Método para mostrar los detalles del producto, como la descripción, código, tipo, costo, impuesto y precio con impuesto.
+     */
     public void mostrarProducto() {
         System.out.println("Descripción: " + descripcion);
         System.out.println("Código: " + codigo);
@@ -51,16 +56,26 @@ public class Producto implements Serializable {
         System.out.println("Precio con impuesto: " + calcularPrecio());
     }
 
+    /**
+     * Compara el producto actual con otro objeto para ver si son iguales.
+     * Los productos se consideran iguales si tienen el mismo código.
+     * @param obj El objeto a comparar con el producto actual.
+     * @return true si los productos tienen el mismo código, false de lo contrario.
+     */
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
+        if (this == obj) return true; // Si ambos objetos son el mismo, son iguales
+        if (obj == null || getClass() != obj.getClass()) return false; // Si el objeto es null o no es de la misma clase, no son iguales
         Producto producto = (Producto) obj;
-        return codigo.equals(producto.codigo); // Considera iguales los productos con el mismo código
+        return codigo.equals(producto.codigo); // Compara por código
     }
 
+    /**
+     * Retorna el código hash del producto basado en su código.
+     * @return El código hash generado a partir del código del producto.
+     */
     @Override
     public int hashCode() {
-        return codigo.hashCode(); // Usa el código del producto para el hash
+        return codigo.hashCode(); // Usa el código del producto para generar el código hash
     }
 }

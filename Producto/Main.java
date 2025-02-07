@@ -4,6 +4,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Inventario inventario = new Inventario();
+        
         // Menú de opciones
         while (true) {
             System.out.println("\nMenú:");
@@ -15,6 +16,7 @@ public class Main {
             System.out.print("Seleccione una opción: ");
             int opcion = scanner.nextInt();
             scanner.nextLine(); // Limpiar buffer
+            
             //Opciones del menú
             try {
                 if (opcion == 1) {
@@ -31,6 +33,7 @@ public class Main {
                     System.out.print("Ingrese cantidad inicial: ");
                     int cantidad = scanner.nextInt();
 
+                    // Agregar un producto nuevo al inventario
                     Producto producto = new Producto(descripcion, codigo, tipo, costo, impuesto);
                     inventario.abastecerInventario(producto, cantidad);
 
@@ -60,6 +63,7 @@ public class Main {
                             System.out.print("Ingrese cantidad inicial: ");
                             int cantidad = scanner.nextInt();
 
+                            // Crear un nuevo producto y abastecerlo
                             Producto nuevoProducto = new Producto(descripcion, codigo, tipo, costo, impuesto);
                             inventario.abastecerInventario(nuevoProducto, cantidad);
                             System.out.println("Producto creado y abastecido con éxito.");
@@ -69,6 +73,7 @@ public class Main {
                     }
 
                 } else if (opcion == 3) {
+                    // Mostrar todo el inventario
                     inventario.mostrarInventario();
 
                 } else if (opcion == 4) {
@@ -82,25 +87,26 @@ public class Main {
                     Producto p2 = inventario.buscarProductoPorCodigo(codigo2);
 
                     if (p1 != null && p2 != null) {
-                        System.out.println(compararProductos(p1, p2));
+                        System.out.println(compararProductos(p1, p2)); // Comparar los dos productos
                     } else {
                         System.out.println("Uno o ambos productos no existen en el inventario.");
                     }
 
                 } else if (opcion == 5) {
-                    break;
+                    break; // Salir del programa
                 }
             } catch (Exception e) {
                 System.out.println("Error: entrada inválida. Intente de nuevo.");
-                scanner.nextLine();
+                scanner.nextLine(); // Limpiar buffer en caso de error
             }
         }
         scanner.close();
     }
 
+
     public static String compararProductos(Producto p1, Producto p2) {
-        double precio1 = p1.calcularPrecio();
-        double precio2 = p2.calcularPrecio();
+        double precio1 = p1.calcularPrecio(); // Obtener precio del primer producto
+        double precio2 = p2.calcularPrecio(); // Obtener precio del segundo producto
 
         if (precio1 > precio2) {
             return "El producto más caro es: " + p1.getDescripcion() + " ($" + precio1 + ")";
